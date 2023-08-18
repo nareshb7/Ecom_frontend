@@ -7,6 +7,7 @@ import Search from "./Search";
 import Menu from "./Menu";
 import "fontsource-roboto";
 import Copyright from "./Copyright";
+import MyCarousel from "./MyCarousal";
 
 const Home = () => {
   const [productsBySell, setProductsBySell] = useState([]);
@@ -40,10 +41,12 @@ const Home = () => {
 
   return (
     <>
-      <div style={{ padding: 25 }}>
+      <div style={{ paddingBottom: 60 }}>
         <Menu />
       </div>
-      <div>{/* <Search style={{ padding: "5px" }} /> */}</div>
+      
+      <div > <Search  /> </div>
+      <MyCarousel/>
       <div className="container  py-3">
         <div className="row mt-3">
           <div className="col-md-12 h2-card">

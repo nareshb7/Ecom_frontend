@@ -8,6 +8,7 @@ import RadioBox from "./RadioBox";
 import { makeStyles } from "@material-ui/core/styles";
 import Menu from "./Menu";
 import Search from "./Search";
+import { getProducts } from "./apiCore";
 import { prices } from "./fixedPrices";
 import Copyright from "./Copyright";
 
@@ -21,7 +22,10 @@ const Shop = () => {
   const [limit, setLimit] = useState(6);
   const [skip, setSkip] = useState(0);
   const [size, setSize] = useState(0);
-  const [filteredResults, setFilteredResults] = useState([]);
+  const [productsByArrival, setProductsByArrival] = useState([]);
+
+
+
 
   const init = () => {
     getCategories().then((data) => {
@@ -33,32 +37,21 @@ const Shop = () => {
     });
   };
 
-  const loadFilteredResults = (newFilters) => {
-    // console.log(newFilters);
-    getFilteredProducts(skip, limit, newFilters).then((data) => {
+
+  const loadProductsByArrival = () => {
+    getProducts("createdAt").then((data) => {
       if (data?.error) {
         setError(data?.error);
       } else {
-        setFilteredResults(data?.data);
-        setSize(data?.size);
-        setSkip(0);
+        setProductsByArrival(data);
       }
     });
   };
 
-  const loadMore = () => {
-    let toSkip = skip + limit;
-    // console.log(newFilters);
-    getFilteredProducts(toSkip, limit, myFilters?.filters).then((data) => {
-      if (data?.error) {
-        setError(data?.error);
-      } else {
-        setFilteredResults([...filteredResults, ...data?.data]);
-        setSize(data?.size);
-        setSkip(toSkip);
-      }
-    });
-  };
+  useEffect(() => {
+    loadProductsByArrival();
+    
+  }, []);
 
   const useStyles = makeStyles((theme) => ({
     btn: {
@@ -74,37 +67,11 @@ const Shop = () => {
 
   const classes = useStyles();
 
-  const loadMoreButton = () => {
-    return (
-      size > 0 &&
-      size >= limit && (
-        // <button onClick={loadMore} className='btn btn-warning mb-5'>
-        //   Load more
-        // </button>
-        <Button onClick={loadMore} variant="contained" className={classes.btn}>
-          Load more
-        </Button>
-      )
-    );
-  };
 
-  useEffect(() => {
-    init();
-    loadFilteredResults(skip, limit, myFilters.filters);
-  }, []);
 
-  const handleFilters = (filters, filterBy) => {
-    // console.log("SHOP", filters, filterBy);
-    const newFilters = { ...myFilters };
-    newFilters.filters[filterBy] = filters;
+ 
 
-    if (filterBy === "price") {
-      let priceValues = handlePrice(filters);
-      newFilters.filters[filterBy] = priceValues;
-    }
-    loadFilteredResults(myFilters?.filters);
-    setMyFilters(newFilters);
-  };
+  
 
   const handlePrice = (value) => {
     const data = prices;
@@ -138,7 +105,7 @@ const Shop = () => {
               New Arrivals
             </h2>
             <div className="row">
-              {filteredResults.map((product, i) => (
+              {productsByArrival?.map((product, i) => (
                 <div
                   key={i}
                   className="col-6 col-sm-6  col-md-6 col-lg-3 my-2 clor p-1"
@@ -152,7 +119,7 @@ const Shop = () => {
 
             <h2 className="mb-2 mt-5">Best Sellers</h2>
             <div className="row">
-              {filteredResults.map((product, i) => (
+              {productsByArrival?.map((product, i) => (
                 <div
                   key={i}
                   className="col-6 col-sm-6  col-md-6 col-lg-3 my-2 clor p-1"
@@ -166,7 +133,7 @@ const Shop = () => {
 
             <h2 className="mb-2 mt-5">Freqently Bought</h2>
             <div className="row">
-              {filteredResults.map((product, i) => (
+              {productsByArrival?.map((product, i) => (
                 <div
                   key={i}
                   className="col-6 col-sm-6  col-md-6 col-lg-3 my-2 clor p-1"

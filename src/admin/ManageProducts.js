@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
+
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import { getProducts, deleteProduct } from './apiAdmin';
@@ -34,10 +34,7 @@ const ManageProducts = () => {
   }, []);
 
   return (
-    <Layout
-      title='Manage Products'
-      description='Perform CRUD on products'
-      className='container-fluid'
+    <
     >
       <div className='row'>
         <div className='col-12'>
@@ -66,7 +63,7 @@ const ManageProducts = () => {
           </ul>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

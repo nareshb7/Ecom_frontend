@@ -45,7 +45,7 @@ const Product = (props) => {
 
  const showAddToCartButton=true;
   const addToCart = () => {
-    // console.log('added');
+    
     addItem(product, setRedirect(true));
   };
 
@@ -58,18 +58,16 @@ const Product = (props) => {
   const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
-        <Button variant="contained" color="white" onClick={addToCart}>
+        <div className="center">
+        <Button variant="contained" color="white" onClick={addToCart} >
           Add to Cart
         </Button>
+        </div>
       )
     );
   };
  
 
-
-
-
-  
 
   useEffect(() => {
     const productId = props.match.params.productId;
@@ -106,42 +104,10 @@ const Product = (props) => {
                        {shouldRedirect(redirect)}
                       <ShowImageProd item={product} url="product" />
                     </div>
-                  </div>
-                  <div
-                    style={{ textAlign: "center", gap: "0.5rem" }}
-                    className="d-flex justify-content-center my-3"
-                  >
-                    <button
-                      style={{
-                        background: "#000",
-                        height: "13px",
-                        width: "7px",
-                        borderRadius: "50%",
-                        border: "1px solid green",
-                      }}
-                    ></button>
-                    <button
-                      style={{
-                        background: "rgb(230 211 211 / 41%)",
-                        height: "13px",
-                        width: "7px",
-                        borderRadius: "50%",
-                        border: "1px solid green",
-                      }}
-                    >
-                       </button>
-                    <button
-                      style={{
-                        background: "rgb(230 211 211 / 41%)",
-                        height: "13px",
-                        width: "7px",
-                        borderRadius: "50%",
-                        border: "1px solid green",
-                      }}
-                    ></button>
-                  </div>
+                  </div> 
+                 
                   <div style={{ textAlign: "center" }} className="cardInfo ">
-                    <h1>{product.name} + Lorem we mut</h1>
+                    <h1>{product.name}</h1>
                     <div className="action">
                       <div className="priceGroup">
                         <p
@@ -152,7 +118,7 @@ const Product = (props) => {
                          
                         </p>
                          
-                        {showAddToCartBtn(showAddToCartButton)}
+                        
                         
                       </div>
                     </div>
@@ -160,6 +126,9 @@ const Product = (props) => {
                 </div>
               )}
             </div>
+          </div>
+          <div style={{ align: "center"}}>
+          {showAddToCartBtn(showAddToCartButton)}
           </div>
           {/* <div className="row mt-4"> */}
           <div className="col-12 col-md-4  mt-3 p-4">

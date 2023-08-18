@@ -65,6 +65,32 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 
   let deliveryAddress = data.address;
 
+  const showCheckButton=() => {
+
+    return (
+      <div
+      className="col-12 col-md-7 my-2 px-3"
+      style={{ margin: "0 auto" }}
+    >
+      <div className="">
+        <h6 className="my-4">
+          Note: We are currently available only for bangalore.
+        </h6>
+      </div>
+      <div
+        className="d-flex justify-content-between bg-dark pt-3 pb-0 px-3 align-items-center "
+        style={{ color: "#fff", cursor: "pointer" }}
+      >
+        <div>
+          <h5>Proceed To Checkout</h5>
+          
+        </div>
+        <div>&#8658;</div>
+      </div>
+    </div>
+    );
+  }
+
   const buy = () => {
     setData({ loading: true });
     // send the nonce to your server
@@ -180,19 +206,25 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     loading && <h2 className='text-danger'>Loading...</h2>;
 
   return (
+    <>
     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                         
-    <div className='checkout'>
-    <div className='subtotal'>
-      <strong>Total: Rs {getTotal()}</strong>
+                        <div
+                    className="col-12 col-md-7 my-2 px-3"
+                    style={{ margin: "0 auto" }}
+                  >
+      <div className="d-flex justify-content-between">
+                      <h5>Total :</h5>
+                      <span>Rs {getTotal()}</span>
+                    </div>
+                    </div>
       {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}
-      {showCheckout()}
-    </div>
-
-    </div>
+      {showCheckButton()}
+    
     </li>
+    </>
   );
 };
 

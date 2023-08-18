@@ -4,7 +4,6 @@ import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import { getPurchaseHistory } from './apiUser';
 import moment from 'moment';
-import Menu from "../core/Menu";
 
 const Dashboard = () => {
   const [history, setHistory] = useState([]);
@@ -31,7 +30,6 @@ const Dashboard = () => {
 
   const userLinks = () => {
     return (
-      
       <div className='card'>
         <h4 className='card-header'>User links</h4>
         <ul className='list-group'>
@@ -94,9 +92,11 @@ const Dashboard = () => {
   };
 
   return (
-    <
+    <Layout
+      title='Dashboard'
+      description={`${name}`}
+      className='container-fluid'
     >
-    <Menu/>
       <div className='row'>
         <div className='col-md-3'>{userLinks()}</div>
         <div className='col-md-9'>
@@ -104,7 +104,7 @@ const Dashboard = () => {
           {purchaseHistory(history)}
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

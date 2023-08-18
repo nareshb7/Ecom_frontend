@@ -66,6 +66,7 @@ const Card1 = ({
   run = undefined, // default value of undefined
 }) => {
   const [redirect, setRedirect] = useState(false);
+   const [items, setItems] = useState([]);
   const [count, setCount] = useState(product.count);
 
   const showViewButton = (showViewProductButton) => {
