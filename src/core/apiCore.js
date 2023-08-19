@@ -121,3 +121,22 @@ export const createOrder = (userId, token, createOrderData) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const checkoutItems = (items , token) => {
+  console.log('ITES::', items)
+  return fetch(`http://localhost:5000/checkout`, {
+    method:'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(items),
+  })
+  .then(res => res.json())
+  .catch(er => er)
+}
+export const getOrdersById = (id) => {
+  return fetch(`http://localhost:5000/checkout/?${new URLSearchParams(id).toString()}`)
+  .then(res =>res.json())
+  .catch(er => er)
+}

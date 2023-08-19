@@ -29,9 +29,19 @@ const Orders = () => {
       }
     });
   };
+  const getMyOrders = () => {
+    getOrdersById(user._id)
+    .then(data => {
+      console.log('ORDERS::', data)
+    })
+    .catch(er => {
+      console.log('ERR', er)
+    })
+  }
 
   useEffect(() => {
     loadOrders();
+    getMyOrders()
     loadStatusValues();
   }, []);
 
