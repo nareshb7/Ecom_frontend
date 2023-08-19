@@ -261,24 +261,22 @@ const MaterialAppBar = ({ history }) => {
     <div className={classes.grow}>
       <AppBar position="fixed">
         <Toolbar>
-          <a href="/" style={{ color: "#000" }}>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="brand"
-            >
-              <StoreIcon />
-            </IconButton>
-          </a>
+         
           <a href="/" style={{ color: "#000", textDecoration: "none" }}>
             <Typography className={classes.title} variant="h6" noWrap>
               WeUgly -
             </Typography>
           </a>
           <div className="menu-serch">
-            <AiOutlineSearch style={{ marginRight: "0.5rem" }} />
-            <AiOutlineShoppingCart style={{ marginLeft: "0.2rem" }} />
+          <Badge badgeContent={itemTotal()} color="secondary">
+           <AiOutlineShoppingCart
+              style={{  
+                marginLeft: "500%",
+                
+              }}
+              onClick={() => history.push("/cart")}
+            />
+            </Badge>
           </div>
           <div className={classes.grow} />
 

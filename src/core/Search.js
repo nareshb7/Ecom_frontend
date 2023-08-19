@@ -9,11 +9,31 @@ import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
+import {  InputAdornment, IconButton } from '@material-ui/core';
+
+
 
 import { getCategories, list } from "./apiCore";
 import Card from "./Card";
 
 const useStyles = makeStyles((theme) => ({
+
+  inputGroup: {
+    paddingTop:'20px',
+    paddingLeft:'20px',
+    paddingRight:'20px',
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: 400,
+    marginLeft: '10 auto',
+  },
+  tField: {
+    flexGrow: 1,
+    width: 300,
+    marginTop: 2,
+  },
+
+
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -21,10 +41,7 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  tField: {
-    width: 800,
-    marginTop: 2,
-  },
+ 
   root: {
     "& > *": {
       margin: theme.spacing(2),
@@ -125,15 +142,24 @@ const Search = () => {
   const classes = useStyles();
 
   const searchForm = () => (
-    <div className="input-group input-group-lg">
+    <div className={classes.inputGroup}>
       <form onSubmit={searchSubmit}>
         <TextField
-          onChange={handleChange("search")}
+          onChange={handleChange('search')}
           id="outlined-basic"
           variant="outlined"
           className={classes.tField}
           autoComplete="off"
-          label={<span>Search by product</span>}
+          label="Search by product"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="center">
+                
+                  <SearchIcon />
+                
+              </InputAdornment>
+            ),
+          }}
         />
       </form>
     </div>
