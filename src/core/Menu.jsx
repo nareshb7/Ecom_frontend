@@ -270,11 +270,11 @@ const MaterialAppBar = ({ history }) => {
           <div className="menu-serch">
           <Badge badgeContent={itemTotal()} color="secondary">
            <AiOutlineShoppingCart
-              style={{  
-                marginLeft: "500%",
+              
+               
                 
-              }}
-              onClick={() => history.push("/cart")}
+      
+             onClick={() => history.push("/cart")}
             />
             </Badge>
           </div>
